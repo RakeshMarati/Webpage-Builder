@@ -33,7 +33,7 @@ export interface TemplateTheme {
 
 export interface TemplateSection {
   id: string;
-  type: 'hero' | 'about' | 'services' | 'testimonials' | 'contact' | 'footer';
+  type: string;
   component: string;
   editableFields: EditableField[];
   required: boolean;
@@ -42,13 +42,13 @@ export interface TemplateSection {
 
 export interface EditableField {
   id: string;
-  type: 'text' | 'textarea' | 'image' | 'color' | 'select' | 'boolean';
+  type: string;
   label: string;
   placeholder?: string;
   maxLength?: number;
   required: boolean;
-  validation?: ValidationRule[];
-  config?: FieldConfig;
+  validation?: any[];
+  config?: any;
 }
 
 export interface Template {
@@ -57,18 +57,17 @@ export interface Template {
   category: string;
   industry: string;
   description: string;
-  conversionRate: string;
+  themes: TemplateTheme[];
+  sections: TemplateSection[];
+  defaultContent: { [key: string]: any };
+  seoConfig: any;
+  performanceScore: number;
+  popularity: number;
   preview: {
     desktop: string;
     mobile: string;
     thumbnail: string;
   };
-  themes: TemplateTheme[];
-  sections: TemplateSection[];
-  defaultContent: { [key: string]: any };
-  seoConfig: SEOConfiguration;
-  performanceScore: number;
-  popularity: number;
   tags: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -80,44 +79,23 @@ export interface PageData {
   businessId: string;
   templateId: string;
   themeId: string;
-  title: string;
-  slug: string;
   content: { [key: string]: any };
   customCSS?: string;
-  seoData: SEOData;
   isPublished: boolean;
   publishedUrl?: string;
-  analytics: PageAnalytics;
+  analytics: any;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface ValidationRule {
-  type: string;
-  message?: string;
-  [key: string]: any;
-}
-
-export interface FieldConfig {
-  [key: string]: any;
-}
-
-export interface SEOConfiguration {
-  title: string;
+export interface Business {
+  id: string;
+  userId: string;
+  name: string;
+  category: string;
   description: string;
-  keywords?: string[];
-  [key: string]: any;
-}
-
-export interface SEOData {
-  title: string;
-  description: string;
-  keywords?: string[];
-  [key: string]: any;
-}
-
-export interface PageAnalytics {
-  views: number;
-  clicks: number;
-  [key: string]: any;
+  contactInfo: any;
+  settings: any;
+  subscription: any;
+  createdAt: Date;
 }
